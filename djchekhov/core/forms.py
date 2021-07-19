@@ -105,7 +105,7 @@ class HousingForm(forms.ModelForm):
     """Form for the data model."""
 
     room_board = forms.ChoiceField(
-        label="Housing",
+        label="",
         choices=ROOM_BOARD_CHOICES,
         widget=forms.RadioSelect(),
     )
