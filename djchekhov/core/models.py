@@ -6,11 +6,12 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
-from taggit.managers import TaggableManager
-
 FINAID_CHOICES = (
     (
-        'I have completed the required financial aid documents.',
+        '''
+        I have completed the required financial aid documents
+        and submitted them to the Financial Aid Office.
+        ''',
         """
         I have completed the required financial aid documents
         and submitted them to the Financial Aid Office.
@@ -21,24 +22,34 @@ FINAID_CHOICES = (
         "I am not receiving loans.",
     ),
 )
-REGISTRATION_CHOICES = (
+PAYMENT_CHOICES = (
     (
-        '',
-        "",
+        'I plan to use the two-payment option above.',
+        "I plan to use the two-payment option above.",
     ),
     (
-        '',
-        "",
+        'I plan to use the monthly payment plan through ECSI.',
+        "I plan to use the monthly payment plan through ECSI.",
+    ),
+)
+REGISTRATION_CHOICES = (
+    (
+        'I have signed in to the My Carthage portal and my schedule is accurate.',
+        "I have signed in to the My Carthage portal and my schedule is accurate.",
+    ),
+    (
+        'I need assistance registering for my classes.',
+        "I need assistance registering for my classes.",
     ),
 )
 GRADUATION_CHOICES = (
     (
-        '',
-        "",
+        'I plan to graduate this academic year.',
+        "I plan to graduate this academic year.",
     ),
     (
-        '',
-        "",
+        'I do not plan to graduate this academic year.',
+        "I do not plan to graduate this academic year.",
     ),
 )
 ROOM_BOARD_CHOICES = (
@@ -53,22 +64,46 @@ ROOM_BOARD_CHOICES = (
 )
 INSURANCE_CHOICES = (
     (
-        '',
-        "",
+        '''
+        I am an international graduate student, and I understand that I will be
+        billed for the cost of international student health insurance.
+        ''',
+        """
+        I am an international graduate student, and I understand that I will be
+        billed for the cost of international student health insurance.
+        """,
     ),
     (
-        '',
-        "",
+        '''
+        I am an international graduate student TLE, and I understand that
+        I will be provided with international student health insurance.
+        ''',
+        """
+        I am an international graduate student TLE, and I understand that
+        I will be provided with international student health insurance.
+        """,
+    ),
+    (
+        'I am not an international student.',
+        "I am not an international student.",
     ),
 )
 PARKING_PERMIT_CHOICES = (
     (
-        '',
-        "",
+        '''
+        I plan to bring a vehicle to campus. I understand that I need
+        to contact the Office of Public Safety at 262-551-5911
+        to register my vehicle and obtain the parking permit.
+        ''',
+        """
+        I plan to bring a vehicle to campus. I understand that I need
+        to contact the Office of Public Safety at 262-551-5911
+        to register my vehicle and obtain the parking permit.
+        """,
     ),
     (
-        '',
-        "",
+        'I do not plan to bring a vehicle to campus at this time',
+        "I do not plan to bring a vehicle to campus at this time",
     ),
 )
 STUDENT_ID_CHOICES = (
@@ -91,7 +126,7 @@ class Manager(models.Model):
         verbose_name='Created by',
         related_name='checkin',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -116,18 +151,18 @@ class Accounts(models.Model):
 
     manager = models.ForeignKey(
         Manager,
-        related_name='finaid',
+        related_name='accounts',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
-    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES)
     rights_responsibilities = models.BooleanField(
         "I have read and agree to the rights and responsibilities.",
         default=False,
     )
-    payment_option = models.CharField(max_length=128, choices=PAYMENT_CHOICES)
+    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES)
+    payment_plans = models.CharField(max_length=128, choices=PAYMENT_CHOICES)
 
 
 class Registrar(models.Model):
@@ -137,7 +172,7 @@ class Registrar(models.Model):
         Manager,
         related_name='registrar',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -153,9 +188,9 @@ class Housing(models.Model):
 
     manager = models.ForeignKey(
         Manager,
-        related_name='registrar',
+        related_name='housing',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -167,9 +202,9 @@ class Compliance(models.Model):
 
     manager = models.ForeignKey(
         Manager,
-        related_name='registrar',
+        related_name='compliance',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -183,9 +218,9 @@ class Emergency(models.Model):
 
     manager = models.ForeignKey(
         Manager,
-        related_name='registrar',
+        related_name='emergency',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -198,9 +233,9 @@ class Services(models.Model):
 
     manager = models.ForeignKey(
         Manager,
-        related_name='registrar',
+        related_name='services',
         editable=False,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)

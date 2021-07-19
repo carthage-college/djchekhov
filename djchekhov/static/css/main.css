@@ -1,0 +1,125 @@
+.navbar {
+  justify-content:center;padding: 0;
+  border-top: 5px solid #3ab0c8;
+  background: url(https://www.carthage.edu/themes/korra/assets/img/main-header-gradient.png) left top repeat-x;
+}
+.navbar-dark .navbar-brand {color:#000;font-weight:600;font-size:.9em;}
+.navbar-dark .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 60, 75, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {margin-right: 42px;}
+  .navbar {padding:2px 0 2px 8px;}
+}
+.navbar-toggler {padding: .5rem;}
+.navbar-toggler-icon {width: 1.1em;height: 1.1em;}
+.dropdown-menu{min-width: 7rem;}
+.container-fluid {padding-left: 0;}
+.col-5, .col-6, .col-12 {padding:0;}
+.form fieldset {padding:0;}
+.error, .notice, .success, .info {
+    padding: .2em;
+    margin-bottom: .25em;
+    border: 2px solid #ddd;
+}
+body.sidenav-toggled .content-wrapper {margin-left: 0px;}
+.content-wrapper {margin-left: 0;}
+body.sidenav-toggled footer.sticky-footer {width: 100%;}
+footer.sticky-footer {width: 100%;}
+.green, .green .glyphicon-ok {color: #008000;}
+.red, .red .glyphicon {color:#800;}
+/* datatables */
+table.dataTable > tbody > tr:hover > td.minor { background-color: #ccf; }
+table.dataTable > tbody > tr:nth-child(2n+1) > td.minor { background-color: #ccf; }
+table.dataTable > tbody tr.selected { background-color: #b0bed9 !important; }
+table.dataTable > tbody tr:nth-child(even):hover td{ background-color: #fae7b5 !important; }
+table.dataTable > tbody tr:nth-child(odd):hover td { background-color: #fae7b5 !important; }
+table.dataTable tbody th, table.dataTable tbody td { padding: 1px 4px; }
+table.dataTable thead th, table.dataTable thead td { border-bottom: 2px solid #111; padding: 6px 4px 2px 4px; }
+table.dataTable tfoot th, table.dataTable tfoot td { padding: 6px 4px 2px 4px; }
+table.dataTable thead th, table.dataTable tfoot th { text-align: center; }
+table.dataTable thead th {white-space: nowrap; padding-right:16px;}
+table.dataTable thead span.sort-icon {
+  display: inline-block;
+  padding-left: 5px;
+  width: 16px;
+  height: 16px;
+}
+div.dt-buttons{margin-top:24px;}
+.navbar-default {z-index:100;}
+.center{text-align:center;}
+div.DTTT {
+float: right;
+margin-bottom: 1em;
+position: relative;
+}
+table.dataTable > tbody > tr > td {text-align: center; white-space: nowrap;}
+table.dataTable > tbody > tr > td.created_at {font-family: monospace;font-size:1.2em;}
+table.dataTable > tbody > tr > td.full_name,
+table.dataTable > tbody > tr > td.group {text-align: left;}
+.dataTables_wrapper{margin-bottom:20px;}
+.dataTables_wrapper .dataTables_processing {top: 0%;}
+.dataTables_length{margin-right:50px;}
+#collapsePrivacy ul { list-style-type: circle;}
+#collapsePrivacy ul li {display: list-item;}
+@media (min-width: 768px) {
+    .navbar-static-side { width: 150px; }
+    #page-wrapper { margin: 0 0 0 150px; }
+}
+
+.d-none{display:none;}
+#page-wrapper{margin:0;padding:0;}
+.panel-primary > .panel-heading { color: inherit; }
+.btn {padding: .1rem .2rem;font-size:inherit;}
+.card-body { padding: .5rem; }
+.card-body select { width: 100%; }
+.card-header { font-size:1.2em; padding: .25rem .5rem;}
+.card-footer { padding: .25rem .5rem;}
+.content-wrapper { margin-top:30px; }
+.text-purple{color:#cbbde2;}
+nav a {color: #003c4b;}
+nav a:hover {color:black;}
+nav .input-group-btn {font-size:1.3em;}
+.navbar-nav .dropdown-menu a {color: white;}
+.navbar-nav .dropdown-menu a:hove {color: #666;}
+.navbar-nav .dropdown-menu {padding: 5px; background-color:#003c4b;}
+.navbar-toggler-icon {color:yellow;}
+.navbar-nav .dropdown, .dropup { padding: 3px; }
+.success a { color: #007bff; }
+.panel-primary > .panel-heading {color: inherit;}
+.btn {padding: .1rem .2rem;font-size:inherit;}
+#students-toggle{margin:10px 0;}
+/* bootstrap overrides */
+.card-header {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.bg-boot{background-color:#563d7c;}
+.panel-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+/* Overrides for BS form classes */
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+.form-group .control-label { font-weight:700; }
+h6 {font-weight: 800;}
+ul.nobull > li > div > ul {list-style: none outside none;}
+.form-check-input {position: inherit;}
+.vaccine-true {
+    position:relative;
+}
+.vaccine-true:after {
+    content: "\f00c";
+    width:100%;
+    color: green;
+    font-family: FontAwesome;
+    margin-left:15px;
+    position:absolute;
+    top:0;
+}
+ul#id_vaccine {list-style: none outside none;}
