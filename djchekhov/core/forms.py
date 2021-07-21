@@ -8,7 +8,6 @@ from djchekhov.core.models import Emergency
 from djchekhov.core.models import Housing
 from djchekhov.core.models import Registrar
 from djchekhov.core.models import Services
-
 from djchekhov.core.models import FINAID_CHOICES
 from djchekhov.core.models import REGISTRATION_CHOICES
 from djchekhov.core.models import GRADUATION_CHOICES
@@ -17,6 +16,7 @@ from djchekhov.core.models import INSURANCE_CHOICES
 from djchekhov.core.models import PARKING_PERMIT_CHOICES
 from djchekhov.core.models import PAYMENT_CHOICES
 from djchekhov.core.models import STUDENT_ID_CHOICES
+from djtools.templatetags.livewhale_api import get_api_data
 
 
 class AccountsForm(forms.ModelForm):
@@ -24,17 +24,18 @@ class AccountsForm(forms.ModelForm):
 
     financial_aid = forms.ChoiceField(
         label="Fiancial Aid",
-        help_text="""
-        """,
+        help_text=get_api_data(3099)['body'],
         choices=FINAID_CHOICES,
         widget=forms.RadioSelect(),
     )
     rights_responsibilities = forms.BooleanField(
-        label="I have read and agree to the rights and responsibilities.",
+        label="Student Accounts",
+        help_text=get_api_data(3098)['body'],
         required=True,
     )
     payment_plans = forms.ChoiceField(
         label="Payment Plans",
+        help_text=get_api_data(3100)['body'],
         choices=PAYMENT_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -50,27 +51,18 @@ class ComplianceForm(forms.ModelForm):
     """Form for the data model."""
 
     community_code = forms.BooleanField(
-        label="""
-            I have read the Community Code and understand that I am
-            responsible for adhering to these policies as a
-            Carthage College graduate student.
-        """,
+        label="Community Code",
+        help_text=get_api_data(3107)['body'],
         required=True,
     )
     sexual_misconduct = forms.BooleanField(
-        label="""
-            I have read the Sexual Misconduct Policy and understand that I am
-            responsible for adhering to these policies as a
-            Carthage College graduate student. 
-        """,
+        label="Sexual Misconduct Policy",
+        help_text=get_api_data(3108)['body'],
         required=True,
     )
     academic_honesty = forms.BooleanField(
-        label="""
-            I have read the Academic Honesty Policy and understand that I am
-            responsible for adhering to these policies as a
-            Carthage College graduate student. 
-        """,
+        label="Academic Honesty Guidelines",
+        help_text=get_api_data(3109)['body'],
         required=True,
     )
 
@@ -85,11 +77,13 @@ class EmergencyForm(forms.ModelForm):
     """Form for the data model."""
 
     emergency_contact = forms.BooleanField(
-        label="I have provided Emergency Contat Information.",
+        label="Emergency Contact",
+        help_text=get_api_data(3111)['body'],
         required=True,
     )
     insurance = forms.ChoiceField(
         label="International Student Insurance",
+        help_text=get_api_data(3110)['body'],
         choices=INSURANCE_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -105,7 +99,8 @@ class HousingForm(forms.ModelForm):
     """Form for the data model."""
 
     room_board = forms.ChoiceField(
-        label="",
+        label="Housing",
+        help_text=get_api_data(3106)['body'],
         choices=ROOM_BOARD_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -121,16 +116,27 @@ class HousingForm(forms.ModelForm):
 class RegistrarForm(forms.ModelForm):
     """Form for the data model."""
 
-    email = forms.BooleanField(required=True)
-    onelogin = forms.BooleanField(label="OneLogin", required=True)
-    schoology = forms.BooleanField(required=True)
+    email = forms.BooleanField(
+        help_text=get_api_data(3101)['body'],
+        required=True,
+    )
+    onelogin = forms.BooleanField(
+        label="OneLogin",
+        help_text=get_api_data(3102)['body'],
+        required=True,
+    )
+    schoology = forms.BooleanField(
+        help_text=get_api_data(3103)['body'],
+        required=True,
+    )
     registration = forms.ChoiceField(
-        label="Housing",
+        label="My Carthage Portal and Course Registration",
+        help_text=get_api_data(3104)['body'],
         choices=REGISTRATION_CHOICES,
         widget=forms.RadioSelect(),
     )
     graduation = forms.ChoiceField(
-        label="Housing",
+        help_text=get_api_data(3105)['body'],
         choices=GRADUATION_CHOICES,
         widget=forms.RadioSelect(),
     )

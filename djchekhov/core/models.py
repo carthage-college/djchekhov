@@ -157,11 +157,11 @@ class Accounts(models.Model):
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
+    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES, help_text="Boo!")
     rights_responsibilities = models.BooleanField(
         "I have read and agree to the rights and responsibilities.",
         default=False,
     )
-    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES)
     payment_plans = models.CharField(max_length=128, choices=PAYMENT_CHOICES)
 
 

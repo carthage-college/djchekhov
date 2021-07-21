@@ -144,7 +144,7 @@ LDAP_ID_ATTR = ''
 LDAP_AUTH_USER_PK = False
 # auth backends
 AUTHENTICATION_BACKENDS = (
-    'djauth.backends.LDAPBackend',
+    #'djauth.backends.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 LOGIN_URL = '{0}accounts/login/'.format(ROOT_URL)
@@ -212,6 +212,7 @@ LOGGING = {
         },
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'include_html': True,
             'class': 'django.utils.log.AdminEmailHandler',
         },

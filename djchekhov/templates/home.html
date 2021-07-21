@@ -63,9 +63,9 @@ $(function(){
         {% endif %}
       </li>
       {% ifusergroup 'carthageStaffStatus' %}
-      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{# url 'dashboard' #}">Dashboard</a></li>
       {% else %}{% ifusergroup 'carthageFacultyStatus' %}
-      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{# url 'dashboard' #}">Dashboard</a></li>
       {% endifusergroup %}{% endifusergroup %}
       {% if user.is_superuser %}
       <li class="divider"></li>
@@ -89,16 +89,16 @@ $(function(){
 {% block content %}
 <div class="forms-container col-lg-8 col-md-8 col-sm-12 col-xs-12 mb-4" style="padding-right:0px !important;">
   <h3 class="red">My Graduate Checklist</h3>
-  {% get_lw_content as intro blurbs 666 %}
+  {% get_lw_content as intro blurbs 3096 %}
   <div class="card card-body">
-    <div id="lw_success_3095">{{intro.body|safe}}</div>
+    <div id="lw_success_3096">{{intro.body|safe}}</div>
     {% if user.is_superuser %}
     <p>
-    <a href="https://www.carthage.edu/livewhale/?blurbs_edit&tid=285&id=3095"
+    <a href="https://www.carthage.edu/livewhale/?blurbs_edit&tid=285&id=3096"
       target="_blank">
       <i class="fa fa-pencil green" aria-hidden="true"
       title="Manage the content above in LiveWhale"></i></a>
-    <a href="#" data-cid="3095" data-target="lw_success_3095" class="clear-cache">
+    <a href="#" data-cid="3096" data-target="lw_success_3096" class="clear-cache">
       <i class="fa fa-refresh green" aria-hidden="true"
       title="Clear the cache for this content"></i></a>
     </p>
@@ -106,27 +106,27 @@ $(function(){
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-      <a href="{% url 'forms' 'accounts' %}" class="btn btn-primary btn-block" role="button">Student Accounts and Financial Aid</a>
-      <a href="{% url 'forms' 'housing' %}" class="btn btn-primary btn-block" role="button">Campus Housing and Meal Plans</a>
-      <a href="{% url 'forms' 'emergency' %}" class="btn btn-primary btn-block" role="button">Emergency Contact and Health Insurance</a>
+      <a href="{% url 'forms' 'accounts' %}" class="btn btn-info btn-block" role="button">Student Accounts and Financial Aid</a>
+      <a href="{% url 'forms' 'housing' %}" class="btn btn-info btn-block" role="button">Campus Housing and Meal Plans</a>
+      <a href="{% url 'forms' 'emergency' %}" class="btn btn-info btn-block" role="button">Emergency Contact and Health Insurance</a>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-      <a href="{% url 'forms' 'registrar' %}" class="btn btn-primary btn-block" role="button">Schoolgy, OneLogin, My Carthage</a>
-      <a href="{% url 'forms' 'compliance' %}" class="btn btn-primary btn-block" role="button">Compliance Documents</a>
-      <a href="{% url 'forms' 'services' %}" class="btn btn-primary btn-block" role="button">Student ID and Parking Permit</a>
+      <a href="{% url 'forms' 'registrar' %}" class="btn btn-info btn-block" role="button">Schoolgy, OneLogin, My Carthage</a>
+      <a href="{% url 'forms' 'compliance' %}" class="btn btn-info btn-block" role="button">Compliance Documents</a>
+      <a href="{% url 'forms' 'services' %}" class="btn btn-info btn-block" role="button">Student ID and Parking Permit</a>
     </div>
   </div>
   <!-- /.row -->
-  {% get_lw_content as intro blurbs 666 %}
+  {% get_lw_content as intro blurbs 3097 %}
   <div class="card card-body mt-4">
-    <div id="lw_success_3095">{{intro.body|safe}}</div>
+    <div id="lw_success_3097">{{intro.body|safe}}</div>
     {% if user.is_superuser %}
     <p>
-    <a href="https://www.carthage.edu/livewhale/?blurbs_edit&tid=285&id=3095"
+    <a href="https://www.carthage.edu/livewhale/?blurbs_edit&tid=285&id=3097"
       target="_blank">
       <i class="fa fa-pencil green" aria-hidden="true"
       title="Manage the content above in LiveWhale"></i></a>
-    <a href="#" data-cid="3095" data-target="lw_success_3095" class="clear-cache">
+    <a href="#" data-cid="3097" data-target="lw_success_3097" class="clear-cache">
       <i class="fa fa-refresh green" aria-hidden="true"
       title="Clear the cache for this content"></i></a>
     </p>

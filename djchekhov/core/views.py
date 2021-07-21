@@ -16,6 +16,14 @@ from django.views.decorators.csrf import csrf_exempt
 from djauth.decorators import portal_auth_required
 from djtools.utils.convert import str_to_class
 
+TITLES = {
+    'accounts': "Student Accounts and Financial Aid",
+    'compliance': "Compliance Documents",
+    'emergency': "Emergency Contact and International Student Insurance",
+    'housing': "Campus Housing and Meal Plan",
+    'registrar': "Email, Schoology, OneLogin, and Registrar",
+    'services': "Student ID and Parking Permit",
+}
 
 @portal_auth_required(
     session_var='DJINDAHAUS_AUTH',
@@ -26,8 +34,13 @@ def home(request):
     return render(request, 'home.html', {})
 
 
+@portal_auth_required(
+    session_var='DJINDAHAUS_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
+)
 def forms(request, slug):
     """Check-in view for all forms."""
+    form_title = TITLES[slug]
     slug = slug.capitalize()
     form_class = str_to_class(
         'djchekhov.core.forms', '{0}Form'.format(slug),
@@ -51,7 +64,7 @@ def forms(request, slug):
             use_required_attribute=settings.REQUIRED_ATTRIBUTE,
         )
 
-    context = {'form': form, 'form_title': slug}
+    context = {'form': form, 'form_title': form_title}
     return render(request, 'forms.html', context)
 
 

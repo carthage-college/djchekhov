@@ -22,6 +22,12 @@
     margin-bottom: .25em;
     border: 2px solid #ddd;
 }
+.help {
+    color: #000 !important;
+    font-weight: normal;
+    font-size: 1em;
+    padding-left: 2px;
+}
 body.sidenav-toggled .content-wrapper {margin-left: 0px;}
 .content-wrapper {margin-left: 0;}
 body.sidenav-toggled footer.sticky-footer {width: 100%;}

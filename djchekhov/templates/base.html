@@ -34,7 +34,7 @@
         {% if user.is_superuser %}
         <a href="{% url 'admin:index' %}">&copy;</a>
         {% else %}{% if user.is_staff %}
-        <a href="{% url 'dashboard' %}">&copy;</a>
+        <a href="{# url 'dashboard' #}">&copy;</a>
         {% else %}
         &copy;
         {% endif %}{% endif %}
