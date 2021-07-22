@@ -152,11 +152,14 @@ class ServicesForm(forms.ModelForm):
     """Form for the data model."""
 
     parking_permit = forms.ChoiceField(
+        label="Parking Permit",
+        help_text=get_api_data(3112)['body'],
         choices=PARKING_PERMIT_CHOICES,
         widget=forms.RadioSelect(),
     )
     student_card = forms.ChoiceField(
         label="Student ID",
+        help_text=get_api_data(3113)['body'],
         choices=STUDENT_ID_CHOICES,
         widget=forms.RadioSelect(),
     )

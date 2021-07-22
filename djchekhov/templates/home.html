@@ -106,14 +106,14 @@ $(function(){
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-      <a href="{% url 'forms' 'accounts' %}" class="btn btn-info btn-block" role="button">Student Accounts and Financial Aid</a>
-      <a href="{% url 'forms' 'housing' %}" class="btn btn-info btn-block" role="button">Campus Housing and Meal Plans</a>
-      <a href="{% url 'forms' 'emergency' %}" class="btn btn-info btn-block" role="button">Emergency Contact and Health Insurance</a>
+        <a href="{% url 'forms' 'accounts' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student Accounts and Financial Aid</a>
+      <a href="{% url 'forms' 'housing' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Campus Housing and Meal Plans</a>
+      <a href="{% url 'forms' 'emergency' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Emergency Contact and Health Insurance</a>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-      <a href="{% url 'forms' 'registrar' %}" class="btn btn-info btn-block" role="button">Schoolgy, OneLogin, My Carthage</a>
-      <a href="{% url 'forms' 'compliance' %}" class="btn btn-info btn-block" role="button">Compliance Documents</a>
-      <a href="{% url 'forms' 'services' %}" class="btn btn-info btn-block" role="button">Student ID and Parking Permit</a>
+      <a href="{% url 'forms' 'registrar' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Schoolgy, OneLogin, My Carthage</a>
+      <a href="{% url 'forms' 'compliance' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Compliance Documents</a>
+      <a href="{% url 'forms' 'services' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student ID and Parking Permit</a>
     </div>
   </div>
   <!-- /.row -->

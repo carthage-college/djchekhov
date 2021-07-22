@@ -31,6 +31,10 @@ PAYMENT_CHOICES = (
         'I plan to use the monthly payment plan through ECSI.',
         "I plan to use the monthly payment plan through ECSI.",
     ),
+    (
+        'I will pay any remaining balance in full.',
+        "I will pay any remaining balance in full.",
+    ),
 )
 REGISTRATION_CHOICES = (
     (
@@ -118,39 +122,11 @@ STUDENT_ID_CHOICES = (
 )
 
 
-class Manager(models.Model):
-    """Manager data class model for the graduate student check in."""
-
-    created_by = models.ForeignKey(
-        User,
-        verbose_name='Created by',
-        related_name='checkin',
-        editable=False,
-        on_delete=models.PROTECT,
-    )
-    created_at = models.DateTimeField("Date Created", auto_now_add=True)
-    updated_at = models.DateTimeField("Date Updated", auto_now=True)
-
-    class Meta:
-        """Information about the data class model."""
-
-        ordering  = ['-created_at']
-        get_latest_by = 'created_at'
-
-    def __str__(self):
-        """Default data for display."""
-        return self.created_by.username
-
-    def get_absolute_url(self):
-        """URL for the display view of the data class model."""
-        return ('checkin_detail', [self.id])
-
-
 class Accounts(models.Model):
     """Student Accounts and Financial Aid."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='accounts',
         editable=False,
         on_delete=models.PROTECT,
@@ -168,8 +144,8 @@ class Accounts(models.Model):
 class Registrar(models.Model):
     """Office of the Registrar data."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='registrar',
         editable=False,
         on_delete=models.PROTECT,
@@ -186,8 +162,8 @@ class Registrar(models.Model):
 class Housing(models.Model):
     """Housing and meal plans."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='housing',
         editable=False,
         on_delete=models.PROTECT,
@@ -200,8 +176,8 @@ class Housing(models.Model):
 class Compliance(models.Model):
     """Documents that the student must sign."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='compliance',
         editable=False,
         on_delete=models.PROTECT,
@@ -216,8 +192,8 @@ class Compliance(models.Model):
 class Emergency(models.Model):
     """ENS and health insurance."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='emergency',
         editable=False,
         on_delete=models.PROTECT,
@@ -231,8 +207,8 @@ class Emergency(models.Model):
 class Services(models.Model):
     """Student services."""
 
-    manager = models.ForeignKey(
-        Manager,
+    user = models.ForeignKey(
+        User,
         related_name='services',
         editable=False,
         on_delete=models.PROTECT,

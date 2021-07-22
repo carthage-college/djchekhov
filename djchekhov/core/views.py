@@ -7,8 +7,10 @@ import json
 import requests
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.cache import cache
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -40,33 +42,48 @@ def home(request):
 )
 def forms(request, slug):
     """Check-in view for all forms."""
+    user = request.user
     form_title = TITLES[slug]
-    slug = slug.capitalize()
-    form_class = str_to_class(
-        'djchekhov.core.forms', '{0}Form'.format(slug),
-    )
-    if request.method == 'POST':
-        form = form_class(
-            request.POST,
-            use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+    status = getattr(user, slug).all().count()
+    response = HttpResponseRedirect(reverse_lazy('home'))
+    if status:
+        messages.add_message(
+            request,
+            messages.WARNING,
+            "You have already submitted the {0} form.".format(form_title),
+            extra_tags='alert-warning',
         )
-        if form.is_valid():
-            reg = form.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Success.",
-                extra_tags='alert-success',
-            )
-            return HttpResponseRedirect(reverse_lazy('home'))
     else:
-        form = form_class(
-            use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+        slug = slug.capitalize()
+        form_class = str_to_class(
+            'djchekhov.core.forms', '{0}Form'.format(slug),
         )
+        if request.method == 'POST':
+            form = form_class(
+                request.POST,
+                use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+            )
+            if form.is_valid():
+                reg = form.save(commit=False)
+                reg.user = user
+                reg.save()
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "Thank for submitting the {0} form.".format(form_title),
+                    extra_tags='alert-success',
+                )
+            else:
+                context = {'form': form, 'form_title': form_title}
+                response = render(request, 'forms.html', context)
+        else:
+            form = form_class(
+                use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+            )
+            context = {'form': form, 'form_title': form_title}
+            response = render(request, 'forms.html', context)
 
-    context = {'form': form, 'form_title': form_title}
-    return render(request, 'forms.html', context)
-
+    return response
 
 @csrf_exempt
 @portal_auth_required(
