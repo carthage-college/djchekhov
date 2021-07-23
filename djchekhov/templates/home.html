@@ -4,8 +4,17 @@
 {% load ifusergroup %}
 {% block extra_javascript %}
 {{ block.super }}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"
+  type="text/javascript"></script>
+<script src="/static/djmaidez/js/validate.js" type="text/javascript"></script>
+<script src="/static/djsani/js/djmaidez.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript">
 $(function(){
+  // build emergency contact modal
+  $("a.ens-link").click(function() {
+    makeDialog();
+  });
   /* clear django cache object by cache key and refresh content */
   $('.clear-cache').on('click', function(e){
     e.preventDefault();
@@ -135,4 +144,8 @@ $(function(){
 </div>
 <!-- /.forms-container /.col-* -->
 {% endblock content %}
-{% block modal %}{% endblock %}
+{% block modal %}
+<div id="emergencyContactFiller">
+  {% include "emergency/modal.html" %}
+</div>
+{% endblock %}
