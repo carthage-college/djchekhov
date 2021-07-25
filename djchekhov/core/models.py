@@ -22,30 +22,6 @@ FINAID_CHOICES = (
         "I am not receiving loans.",
     ),
 )
-PAYMENT_CHOICES = (
-    (
-        'I plan to use the two-payment option above.',
-        "I plan to use the two-payment option above.",
-    ),
-    (
-        'I plan to use the monthly payment plan through ECSI.',
-        "I plan to use the monthly payment plan through ECSI.",
-    ),
-    (
-        'I will pay any remaining balance in full.',
-        "I will pay any remaining balance in full.",
-    ),
-)
-REGISTRATION_CHOICES = (
-    (
-        'I have signed in to the My Carthage portal and my schedule is accurate.',
-        "I have signed in to the My Carthage portal and my schedule is accurate.",
-    ),
-    (
-        'I need assistance registering for my classes.',
-        "I need assistance registering for my classes.",
-    ),
-)
 GRADUATION_CHOICES = (
     (
         'I plan to graduate this academic year.',
@@ -54,16 +30,6 @@ GRADUATION_CHOICES = (
     (
         'I do not plan to graduate this academic year.',
         "I do not plan to graduate this academic year.",
-    ),
-)
-ROOM_BOARD_CHOICES = (
-    (
-        'I do not need graduate housing or a meal plan',
-        "I do not need graduate housing or a meal plan",
-    ),
-    (
-        'I do need graduate housing and/or a meal plan',
-        "I do need graduate housing and/or a meal plan",
     ),
 )
 INSURANCE_CHOICES = (
@@ -110,6 +76,58 @@ PARKING_PERMIT_CHOICES = (
         "I do not plan to bring a vehicle to campus at this time",
     ),
 )
+PAYMENT_CHOICES = (
+    (
+        'I plan to use the two-payment option above.',
+        "I plan to use the two-payment option above.",
+    ),
+    (
+        'I plan to use the monthly payment plan through ECSI.',
+        "I plan to use the monthly payment plan through ECSI.",
+    ),
+    (
+        'I will pay any remaining balance in full.',
+        "I will pay any remaining balance in full.",
+    ),
+)
+PROGRAM_CHOICES = (
+    (
+        'Athletic Training',
+        "Athletic Training",
+    ),
+    (
+        'Business',
+        "Business",
+    ),
+    (
+        'Education',
+        "Education",
+    ),
+    (
+        'Music',
+        "Music",
+    ),
+)
+REGISTRATION_CHOICES = (
+    (
+        'I have signed in to the My Carthage portal and my schedule is accurate.',
+        "I have signed in to the My Carthage portal and my schedule is accurate.",
+    ),
+    (
+        'I need assistance registering for my classes.',
+        "I need assistance registering for my classes.",
+    ),
+)
+ROOM_BOARD_CHOICES = (
+    (
+        'I do not need graduate housing or a meal plan',
+        "I do not need graduate housing or a meal plan",
+    ),
+    (
+        'I do need graduate housing and/or a meal plan',
+        "I do need graduate housing and/or a meal plan",
+    ),
+)
 STUDENT_ID_CHOICES = (
     (
         'I have updated my digital photo for my Carthage ID at the harbor link above.',
@@ -120,6 +138,34 @@ STUDENT_ID_CHOICES = (
         "I need assistance taking and uploading a digital photo for my ID card.",
     ),
 )
+
+
+class Profile(models.Model):
+    """Profile data class model for the graduate student check in."""
+
+    user = models.OneToOneField(
+        User,
+        related_name='profile',
+        editable=False,
+        on_delete=models.PROTECT,
+    )
+    created_at = models.DateTimeField("Date Created", auto_now_add=True)
+    updated_at = models.DateTimeField("Date Updated", auto_now=True)
+    program = models.CharField(max_length=128, choices=PROGRAM_CHOICES)
+
+    class Meta:
+        """Information about the data class model."""
+
+        ordering  = ['-created_at']
+        get_latest_by = 'created_at'
+
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1}): {2}".format(
+            self.user.username,
+            self.user.id,
+            self.program,
+        )
 
 
 class Accounts(models.Model):

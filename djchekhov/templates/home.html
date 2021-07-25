@@ -96,7 +96,7 @@ $(function(){
   {% endif %}
 {% endblock %}
 {% block content %}
-<div class="forms-container col-lg-8 col-md-8 col-sm-12 col-xs-12 mb-4" style="padding-right:0px !important;">
+<div class="forms-container col-lg-8 col-md-12 col-sm-12 col-xs-12 mb-4" style="padding-right:0px !important;">
   <h3 class="red">My Graduate Checklist</h3>
   {% get_lw_content as intro blurbs 3096 %}
   <div class="card card-body">
@@ -115,14 +115,14 @@ $(function(){
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-        <a href="{% url 'forms' 'accounts' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student Accounts and Financial Aid</a>
-      <a href="{% url 'forms' 'housing' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Campus Housing and Meal Plans</a>
-      <a href="{% url 'forms' 'emergency' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Emergency Contact and Health Insurance</a>
+        <a href="{% url 'forms' 'accounts' %}" class="btn btn-block{% if user.accounts.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student Accounts and Financial Aid</a>
+      <a href="{% url 'forms' 'housing' %}" class="btn btn-block{% if user.housing.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Campus Housing and Meal Plans</a>
+      <a href="{% url 'forms' 'emergency' %}" class="btn btn-block{% if user.emergency.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Emergency Contact and Health Insurance</a>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
       <a href="{% url 'forms' 'registrar' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Schoolgy, OneLogin, My Carthage</a>
-      <a href="{% url 'forms' 'compliance' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Compliance Documents</a>
-      <a href="{% url 'forms' 'services' %}" class="btn btn-block{% if user.registrar.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student ID and Parking Permit</a>
+      <a href="{% url 'forms' 'compliance' %}" class="btn btn-block{% if user.compliance.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Compliance Documents</a>
+      <a href="{% url 'forms' 'services' %}" class="btn btn-block{% if user.services.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student ID and Parking Permit</a>
     </div>
   </div>
   <!-- /.row -->
