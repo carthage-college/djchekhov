@@ -52,7 +52,7 @@ urlpatterns = [
     # clear cache via ajax post
     path('cache/<str:ctype>/clear/', views.clear_cache, name='clear_cache'),
     # dashboard
-    #path('dashboard/', include('djchekhov.dashboard.urls')),
+    path('dashboard/', include('djchekhov.dashboard.urls')),
     # emergency contact manager
     path('emergency/', include('djchekhov.emergency.urls')),
     # home

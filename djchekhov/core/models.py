@@ -5,6 +5,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.dispatch import receiver
 
 FINAID_CHOICES = (
     (
@@ -179,7 +180,7 @@ class Accounts(models.Model):
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
-    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES, help_text="Boo!")
+    financial_aid = models.CharField(max_length=128, choices=FINAID_CHOICES)
     rights_responsibilities = models.BooleanField(
         "I have read and agree to the rights and responsibilities.",
         default=False,
@@ -267,3 +268,10 @@ class Services(models.Model):
         max_length=128,
         choices=STUDENT_ID_CHOICES,
     )
+
+
+@receiver(models.signals.post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Post-save signal function to create a user profile instance."""
+    if created and not kwargs.get('raw', False):
+        Profile.objects.create(user=instance)

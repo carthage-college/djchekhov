@@ -263,6 +263,7 @@ LOGGING = {
     },
 }
 # app constants
+MANAGERS_GROUP = 'Managers'
 
 ##################
 # LOCAL SETTINGS #

@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import csv
 import os
 import sys
 
@@ -12,6 +13,7 @@ import django
 django.setup()
 
 from django.conf import settings
+from pprint import pprint
 
 import argparse
 import logging
@@ -20,7 +22,7 @@ logger = logging.getLogger('debug_logfile')
 
 # set up command-line options
 desc = """
-Accepts as input...
+Accepts as input a CSV file for user and profile data.
 """
 
 # RawTextHelpFormatter method allows for new lines in help text
@@ -29,11 +31,11 @@ parser = argparse.ArgumentParser(
 )
 
 parser.add_argument(
-    '-x',
-    '--equis',
+    '-f',
+    '--file',
     required=True,
-    help="Lorem ipsum dolor sit amet.",
-    dest='equis',
+    help="Path to file",
+    dest='phile',
 )
 parser.add_argument(
     '--test',
@@ -45,16 +47,20 @@ parser.add_argument(
 
 def main():
     """Main function description."""
-    if test:
-        print("this is a test")
-        logger.debug("debug = %s" % test)
-    else:
-        print("this is not a test")
+    with open(phile, 'r') as users:
+        dialect = csv.Sniffer().sniff(users.read(1024 * 1024))
+        users.seek(0)
+        delimiter = dialect.delimiter
+        reader = csv.DictReader(
+            users, delimiter=delimiter, quoting=csv.QUOTE_NONE,
+        )
+        for row in reader:
+            print(row['last_name'])
 
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    equis = args.equis
+    phile = args.phile
     test = args.test
 
     if test:

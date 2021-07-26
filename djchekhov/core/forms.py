@@ -23,7 +23,7 @@ class AccountsForm(forms.ModelForm):
     """Form for the Student Accounts data model."""
 
     financial_aid = forms.ChoiceField(
-        label="Fiancial Aid",
+        label="Financial Aid",
         help_text=get_api_data(3099)['body'],
         choices=FINAID_CHOICES,
         widget=forms.RadioSelect(),

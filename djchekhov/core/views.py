@@ -28,16 +28,16 @@ TITLES = {
 }
 
 @portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
+    session_var='DJCHEKHOV_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
 def home(request):
     """Display the check-in main view."""
-    return render(request, 'home.html', {})
+    return render(request, 'home.html')
 
 
 @portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
+    session_var='DJCHEKHOV_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
 def forms(request, slug):
@@ -87,7 +87,7 @@ def forms(request, slug):
 
 @csrf_exempt
 @portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
+    session_var='DJCHEKHOV_AUTH',
     redirect_url=reverse_lazy('access_denied'),
     group='carthageStaffStatus',
 )

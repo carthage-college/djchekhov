@@ -15,6 +15,28 @@ $(function(){
   $("a.ens-link").click(function() {
     makeDialog();
   });
+  /* datatables initialization for managers */
+  $('#chekhovManagers').DataTable({
+    'lengthMenu': [
+      [100, 250, 500, 1000],
+      [100, 250, 500, 1000]
+    ],
+    'language': {
+      'search': 'Filter records:',
+      'lengthMenu': 'Display _MENU_'
+    },
+    order: [[3, 'desc']],
+    dom: 'lfrBtip',
+    responsive: true,
+    buttons: [
+      {
+        extend: 'excelHtml5',
+        exportOptions: {
+          columns: ':visible'
+        }
+      }
+    ]
+  });
   /* clear django cache object by cache key and refresh content */
   $('.clear-cache').on('click', function(e){
     e.preventDefault();
@@ -71,11 +93,9 @@ $(function(){
         </a>
         {% endif %}
       </li>
-      {% ifusergroup 'carthageStaffStatus' %}
-      <li><a href="{# url 'dashboard' #}">Dashboard</a></li>
-      {% else %}{% ifusergroup 'carthageFacultyStatus' %}
-      <li><a href="{# url 'dashboard' #}">Dashboard</a></li>
-      {% endifusergroup %}{% endifusergroup %}
+      {% ifusergroup 'Managers' %}
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      {% endifusergroup %}
       {% if user.is_superuser %}
       <li class="divider"></li>
       <li><a href="{% url 'admin:index' %}">Admin</a></li>
@@ -115,7 +135,7 @@ $(function(){
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
-        <a href="{% url 'forms' 'accounts' %}" class="btn btn-block{% if user.accounts.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student Accounts and Financial Aid</a>
+      <a href="{% url 'forms' 'accounts' %}" class="btn btn-block{% if user.accounts.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Student Accounts and Financial Aid</a>
       <a href="{% url 'forms' 'housing' %}" class="btn btn-block{% if user.housing.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Campus Housing and Meal Plans</a>
       <a href="{% url 'forms' 'emergency' %}" class="btn btn-block{% if user.emergency.all.count == 1 %} btn-success{% else %} btn-info{% endif %}" role="button">Emergency Contact and Health Insurance</a>
     </div>
