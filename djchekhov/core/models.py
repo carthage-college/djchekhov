@@ -35,24 +35,12 @@ GRADUATION_CHOICES = (
 )
 INSURANCE_CHOICES = (
     (
-        '''
-        I am an international graduate student, and I understand that I will be
-        billed for the cost of international student health insurance.
-        ''',
-        """
-        I am an international graduate student, and I understand that I will be
-        billed for the cost of international student health insurance.
-        """,
+        'I am an international graduate student, and I understand that I will be billed for the cost of international student health insurance.',
+        "I am an international graduate student, and I understand that I will be billed for the cost of international student health insurance.",
     ),
     (
-        '''
-        I am an international graduate student TLE, and I understand that
-        I will be provided with international student health insurance.
-        ''',
-        """
-        I am an international graduate student TLE, and I understand that
-        I will be provided with international student health insurance.
-        """,
+        'I am an international graduate student TLE, and I understand that I will be provided with international student health insurance.',
+        "I am an international graduate student TLE, and I understand that I will be provided with international student health insurance.",
     ),
     (
         'I am not an international student.',
@@ -61,16 +49,8 @@ INSURANCE_CHOICES = (
 )
 PARKING_PERMIT_CHOICES = (
     (
-        '''
-        I plan to bring a vehicle to campus. I understand that I need
-        to contact the Office of Public Safety at 262-551-5911
-        to register my vehicle and obtain the parking permit.
-        ''',
-        """
-        I plan to bring a vehicle to campus. I understand that I need
-        to contact the Office of Public Safety at 262-551-5911
-        to register my vehicle and obtain the parking permit.
-        """,
+        'I plan to bring a vehicle to campus. I understand that I need to contact the Office of Public Safety at 262-551-5911 to register my vehicle and obtain the parking permit.',
+        "I plan to bring a vehicle to campus. I understand that I need to contact the Office of Public Safety at 262-551-5911 to register my vehicle and obtain the parking permit.",
     ),
     (
         'I do not plan to bring a vehicle to campus at this time',
@@ -91,7 +71,12 @@ PAYMENT_CHOICES = (
         "I will pay any remaining balance in full.",
     ),
 )
+
 PROGRAM_CHOICES = (
+    (
+        'ACT/MED',
+        "ACT/MED",
+    ),
     (
         'Athletic Training',
         "Athletic Training",
@@ -147,7 +132,7 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User,
         related_name='profile',
-        editable=False,
+        #editable=False,
         on_delete=models.PROTECT,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
@@ -168,6 +153,38 @@ class Profile(models.Model):
             self.program,
         )
 
+    def get_object(self, slug):
+        """Return the object data."""
+        current = None
+        all_set = getattr(self.user, slug).all()
+        if all_set:
+            current = all_set.first()
+        return current
+
+    def accounts(self):
+        """Return the student accounts data."""
+        return self.get_object('accounts')
+
+    def compliance(self):
+        """Return the compliance data."""
+        return self.get_object('compliance')
+
+    def emergency(self):
+        """Return the emergency contact and insurance data."""
+        return self.get_object('emergency')
+
+    def housing(self):
+        """Return the housing data."""
+        return self.get_object('housing')
+
+    def registrar(self):
+        """Return the registrar data."""
+        return self.get_object('registrar')
+
+    def services(self):
+        """Return the student services data."""
+        return self.get_object('services')
+
 
 class Accounts(models.Model):
     """Student Accounts and Financial Aid."""
@@ -186,38 +203,6 @@ class Accounts(models.Model):
         default=False,
     )
     payment_plans = models.CharField(max_length=128, choices=PAYMENT_CHOICES)
-
-
-class Registrar(models.Model):
-    """Office of the Registrar data."""
-
-    user = models.ForeignKey(
-        User,
-        related_name='registrar',
-        editable=False,
-        on_delete=models.PROTECT,
-    )
-    created_at = models.DateTimeField("Date Created", auto_now_add=True)
-    updated_at = models.DateTimeField("Date Updated", auto_now=True)
-    email = models.BooleanField(default=False)
-    onelogin = models.BooleanField("OneLogin", default=False)
-    schoology = models.BooleanField(default=False)
-    registration = models.CharField(max_length=128, choices=REGISTRATION_CHOICES)
-    graduation = models.CharField(max_length=128, choices=GRADUATION_CHOICES)
-
-
-class Housing(models.Model):
-    """Housing and meal plans."""
-
-    user = models.ForeignKey(
-        User,
-        related_name='housing',
-        editable=False,
-        on_delete=models.PROTECT,
-    )
-    created_at = models.DateTimeField("Date Created", auto_now_add=True)
-    updated_at = models.DateTimeField("Date Updated", auto_now=True)
-    room_board = models.CharField(max_length=128, choices=ROOM_BOARD_CHOICES)
 
 
 class Compliance(models.Model):
@@ -248,7 +233,39 @@ class Emergency(models.Model):
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
     emergency_contact = models.BooleanField(default=False)
-    insurance = models.CharField(max_length=128, choices=INSURANCE_CHOICES)
+    insurance = models.CharField(max_length=152, choices=INSURANCE_CHOICES)
+
+
+class Housing(models.Model):
+    """Housing and meal plans."""
+
+    user = models.ForeignKey(
+        User,
+        related_name='housing',
+        editable=False,
+        on_delete=models.PROTECT,
+    )
+    created_at = models.DateTimeField("Date Created", auto_now_add=True)
+    updated_at = models.DateTimeField("Date Updated", auto_now=True)
+    room_board = models.CharField(max_length=128, choices=ROOM_BOARD_CHOICES)
+
+
+class Registrar(models.Model):
+    """Office of the Registrar data."""
+
+    user = models.ForeignKey(
+        User,
+        related_name='registrar',
+        editable=False,
+        on_delete=models.PROTECT,
+    )
+    created_at = models.DateTimeField("Date Created", auto_now_add=True)
+    updated_at = models.DateTimeField("Date Updated", auto_now=True)
+    email = models.BooleanField(default=False)
+    onelogin = models.BooleanField("OneLogin", default=False)
+    schoology = models.BooleanField(default=False)
+    registration = models.CharField(max_length=128, choices=REGISTRATION_CHOICES)
+    graduation = models.CharField(max_length=128, choices=GRADUATION_CHOICES)
 
 
 class Services(models.Model):
@@ -262,7 +279,7 @@ class Services(models.Model):
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
-    parking_permit = models.CharField(max_length=128, choices=PARKING_PERMIT_CHOICES)
+    parking_permit = models.CharField(max_length=192, choices=PARKING_PERMIT_CHOICES)
     student_card = models.CharField(
         "Student ID",
         max_length=128,

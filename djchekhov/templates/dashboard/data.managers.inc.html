@@ -1,56 +1,94 @@
 {% load cache %}
 <div class="table-responsive mb-5">
-  <table class="table table-striped table-bordered table-hover display" id="redpandaVaccine">
+  <table class="table table-striped table-bordered table-hover display" id="chekhovManagers">
     <thead>
       <tr>
         <th>Name</th>
         <th>CID</th>
-        <th>Group</th>
-        <th>Vax</th>
-        <th>Vax Date</th>
-        <th>Submit Date</th>
-        <th>Card</th>
+        <th>Program</th>
+        <th>Financial Aid</th>
+        <th>Rights/Responsibilities</th>
+        <th>Payment Plan</th>
+        <th>Email</th>
+        <th>OneLogin</th>
+        <th>Schoology</th>
+        <th>Registration</th>
+        <th>Graduation</th>
+        <th>Room/Board</th>
+        <th>Community Code</th>
+        <th>Sexual Misconduct</th>
+        <th>Academic Honesty</th>
+        <th>Emergency Contact</th>
+        <th>Insurance</th>
+        <th>Parking Permit</th>
+        <th>Student ID</th>
       </tr>
     </thead>
     <tbody>
-    {% for profile in profiles %}
+    {% for user in students %}
       <tr>
-        {% cache 31536000 user_fullname profile.user.id %}
+        {# cache 31536000 user_fullname user.id #}
         <td nowrap style="text-align: left;">
-            <a href="mailto:{{profile.user.email}}">{{profile.user.last_name}}, {{profile.user.first_name}}</a>
+            <a href="mailto:{{user.email}}">{{user.last_name}}, {{user.first_name}}</a>
         </td>
-        {% endcache %}
-        {% cache 31536000 user_cid profile.user.id %}
+        {# endcache #}
+        {# cache 31536000 user_cid user.id #}
         <td nowrap style="font-family: monospace;font-size:1.1em; text-align: center;">
-          {{profile.user.id}}
+          {{user.id}}
         </td>
-        {% endcache %}
-        {% cache 31536000 user_group profile.user.id %}
+        {# endcache #}
+        {# cache 31536000 user_group profile.user.id #}
         <td nowrap style="text-align: center;">
-          {{profile.get_group}}
+          {{user.profile.program}}
         </td>
-        {% endcache %}
-        <td nowrap style="text-align: center;">
-          {% if profile.vaccine == 'Yes' %}
-          <i class="fa fa-check green" title="Vaccine"><span style="display:none;">✓</span> </i>
-          {% else %}
-          {% if profile.vax_rationale %}
-          <a style="cursor: help;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="{{profile.vax_rationale}}"><i class="fa fa-commenting red" aria-hidden="true"></i></a>
-          <span style="display:none;">{{profile.vax_rationale}}</span>
-          {% endif %}{% endif %}
-        </td>
-        <td nowrap style="font-family: monospace;font-size:1.1em;">
-          {{profile.vaccine_date|date:'Y-m-d'}}
-        </td>
-        <td nowrap style="font-family: monospace;font-size:1.1em;">
-          {{profile.updated_at|date:'Y-m-d H:i:s'}}
+        {# endcache #}
+        <td nowrap>
+          {{user.profile.accounts.financial_aid}}
         </td>
         <td nowrap>
-        {% if profile.vaccine == 'Yes' and profile.vaccine_card_front %}
-        <a href="{{media_url}}{{profile.vaccine_card_front}}" target="_blank">
-          <i class="fa fa-picture-o" title="Vaccine card"></i></a>
-        <span style="display:none;">https://{{server_url}}{{media_url}}{{profile.vaccine_card_front}}</span>
-        {% endif %}
+          {{user.profile.accounts.rights_responsibilities}}
+        </td>
+        <td nowrap>
+          {{user.profile.accounts.payment_plans}}
+        </td>
+        <td nowrap>
+          {{user.profile.registrar.email}}
+        </td>
+        <td nowrap>
+          {{user.profile.registrar.onelogin}}
+        </td>
+        <td nowrap>
+          {{user.profile.registrar.schoology}}
+        </td>
+        <td nowrap>
+          {{user.profile.registrar.registration}}
+        </td>
+        <td nowrap>
+          {{user.profile.registrar.graduation}}
+        </td>
+        <td nowrap>
+          {{user.profile.housing.room_board}}
+        </td>
+        <td nowrap>
+          {{user.profile.compliance.community_code}}
+        </td>
+        <td nowrap>
+          {{user.profile.compliance.sexual_misconduct}}
+        </td>
+        <td nowrap>
+          {{user.profile.compliance.academic_honesty}}
+        </td>
+        <td nowrap>
+          {{user.profile.emergency.emergency_contact}}
+        </td>
+        <td nowrap>
+          {{user.profile.emergency.insurance}}
+        </td>
+        <td nowrap>
+          {{user.profile.services.parking_permit}}
+        </td>
+        <td nowrap>
+          {{user.profile.services.student_card}}
         </td>
       </tr>
     {% endfor %}
@@ -59,11 +97,23 @@
       <tr>
         <th>Name</th>
         <th>CID</th>
-        <th>Group</th>
-        <th>Vax</th>
-        <th>Vax Date</th>
-        <th>Submit Date</th>
-        <th>Card</th>
+        <th>Program</th>
+        <th>Financial Aid</th>
+        <th>Rights/Responsibilities</th>
+        <th>Payment Plan</th>
+        <th>Email</th>
+        <th>OneLogin</th>
+        <th>Schoology</th>
+        <th>Registration</th>
+        <th>Graduation</th>
+        <th>Room/Board</th>
+        <th>Community Code</th>
+        <th>Sexual Misconduct</th>
+        <th>Academic Honesty</th>
+        <th>Emergency Contact</th>
+        <th>Insurance</th>
+        <th>Parking Permit</th>
+        <th>Student ID</th>
       </tr>
     </tfoot>
   </table>

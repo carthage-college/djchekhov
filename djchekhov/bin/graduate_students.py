@@ -13,7 +13,7 @@ import django
 django.setup()
 
 from django.conf import settings
-from pprint import pprint
+from django.contrib.auth.models import User
 
 import argparse
 import logging
@@ -55,7 +55,17 @@ def main():
             users, delimiter=delimiter, quoting=csv.QUOTE_NONE,
         )
         for row in reader:
-            print(row['last_name'])
+            user, created = User.objects.get_or_create(
+                id=row['id'],
+                first_name=row['first_name'],
+                last_name=row['last_name'],
+                username=row['username'],
+                email='{0}@carthage.edu'.format(row['username']),
+            )
+            profile = user.profile
+            profile.program=row['program']
+            profile.save()
+            print(created)
 
 
 if __name__ == '__main__':
