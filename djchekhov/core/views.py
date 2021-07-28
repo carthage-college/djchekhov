@@ -17,6 +17,7 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from djauth.decorators import portal_auth_required
 from djtools.utils.convert import str_to_class
+from djtools.utils.users import in_group
 
 TITLES = {
     'accounts': "Student Accounts and Financial Aid",
@@ -27,14 +28,19 @@ TITLES = {
     'services': "Student ID and Parking Permit",
 }
 
+
 @portal_auth_required(
     session_var='DJCHEKHOV_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
 def home(request):
     """Display the check-in main view."""
-    return render(request, 'home.html')
-
+    user = request.user
+    manager = in_group(user, settings.MANAGERS_GROUP)
+    response = render(request, 'home.html')
+    if manager and not user.is_superuser:
+        response = HttpResponseRedirect(reverse_lazy('dashboard'))
+    return response
 
 @portal_auth_required(
     session_var='DJCHEKHOV_AUTH',
