@@ -16,6 +16,12 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from djauth.decorators import portal_auth_required
+from djimix.core.utils import get_connection
+from djimix.core.utils import xsql
+from djmaidez.contact.data import AA_REC
+from djmaidez.contact.data import ENS_FIELDS
+from djmaidez.contact.data import MOBILE_CARRIER
+from djmaidez.contact.data import RELATIONSHIP
 from djtools.utils.convert import str_to_class
 from djtools.utils.users import in_group
 
@@ -60,9 +66,8 @@ def forms(request, slug):
             extra_tags='alert-warning',
         )
     else:
-        slug = slug.capitalize()
         form_class = str_to_class(
-            'djchekhov.core.forms', '{0}Form'.format(slug),
+            'djchekhov.core.forms', '{0}Form'.format(slug.capitalize()),
         )
         if request.method == 'POST':
             form = form_class(
@@ -87,6 +92,20 @@ def forms(request, slug):
                 use_required_attribute=settings.REQUIRED_ATTRIBUTE,
             )
             context = {'form': form, 'form_title': form_title}
+            if slug == 'emergency':
+                with get_connection(settings.INFORMIX_ODBC) as connection:
+                    # emergency contact modal form
+                    sql = '{0} AND id="{1}"'.format(AA_REC, user.id)
+                    rows = xsql(sql, connection)
+                    for row in rows:
+                        ens = {}
+                        for field in ENS_FIELDS:
+                            ens[field] = getattr(row, field)
+                        context[row.aa] = ens
+                    context['mobile_carrier'] = MOBILE_CARRIER
+                    context['relationship'] = RELATIONSHIP
+                    context['solo'] = True
+
             response = render(request, 'forms.html', context)
 
     return response
