@@ -10,6 +10,10 @@
 <script src="/static/djmaidez/js/validate.js" type="text/javascript"></script>
 <script src="/static/djsani/js/djmaidez.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript">
+<!-- ens -->
+function GetUserID() {
+    return parseInt("{{request.user.id}}",10);
+}
 $(function(){
   // build emergency contact modal
   $("a.ens-link").click(function() {
@@ -18,8 +22,8 @@ $(function(){
   /* datatables initialization for managers */
   $('#chekhovManagers').DataTable({
     'lengthMenu': [
-      [100, 250, 500, 1000],
-      [100, 250, 500, 1000]
+      [250, 500, 1000],
+      [250, 500, 1000]
     ],
     'language': {
       'search': 'Filter records:',
