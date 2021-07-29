@@ -20,5 +20,5 @@ from djauth.decorators import portal_auth_required
 )
 def home(request):
     """Dashboard home for administrators."""
-    students = User.objects.filter(profile__program__isnull=False)
+    students =  User.objects.exclude(profile__program__isnull=True).exclude(profile__program='')
     return render(request, 'dashboard/home.html', {'students': students})
