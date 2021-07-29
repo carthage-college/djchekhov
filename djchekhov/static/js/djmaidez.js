@@ -10,7 +10,7 @@ function makeDialog() {
         top: 10,
         buttons: { "Save": function(){
             if(isValid() && !isNaN(GetUserID())) {
-                $.getJSON('/apps/chekhov/emergency/save/?callback=?', {
+                $.getJSON('/graduate-studies/check-in/emergency/save/?callback=?', {
                     MIS1_NAME: $("#MIS1_NAME").val(),
                     MIS1_REL: $("#MIS1_REL").val(),
                     MIS1_PHONE1: $("#MIS1_PHONE1").val(),
@@ -34,12 +34,10 @@ function makeDialog() {
                     ICE2_PHONE1: $("#ICE2_PHONE1").val(),
                     ICE2_PHONE2: $("#ICE2_PHONE2").val(),
                     ICE2_PHONE3: $("#ICE2_PHONE3").val(),
-                    ICE2_REL: $("#ICE2_REL").val(),
-                    DJSANI: "True"
+                    ICE2_REL: $("#ICE2_REL").val()
                 });
-                // set yellow checkmark
-                $(".djsani").html('<i class="fa fa-check yellow"></i>');
-                console.log('isvalid');
+                // set checkmark
+                $("#id_emergency_contact").prop('checked', true);
             }
         }}
     });
