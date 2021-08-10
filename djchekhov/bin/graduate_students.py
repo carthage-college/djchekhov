@@ -55,12 +55,13 @@ def main():
             users, delimiter=delimiter, quoting=csv.QUOTE_NONE,
         )
         for row in reader:
+            username = row['email'].split('@')[0]
             user, created = User.objects.get_or_create(
                 id=row['id'],
                 first_name=row['first_name'],
                 last_name=row['last_name'],
-                username=row['username'],
-                email='{0}@carthage.edu'.format(row['username']),
+                username=username,
+                email=row['email'],
             )
             profile = user.profile
             profile.program=row['program']
