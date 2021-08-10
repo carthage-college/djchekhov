@@ -133,7 +133,7 @@ class Profile(models.Model):
         User,
         related_name='profile',
         #editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -193,7 +193,7 @@ class Accounts(models.Model):
         User,
         related_name='accounts',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -212,7 +212,7 @@ class Compliance(models.Model):
         User,
         related_name='compliance',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -228,7 +228,7 @@ class Emergency(models.Model):
         User,
         related_name='emergency',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -243,7 +243,7 @@ class Housing(models.Model):
         User,
         related_name='housing',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -257,7 +257,7 @@ class Registrar(models.Model):
         User,
         related_name='registrar',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -275,7 +275,7 @@ class Services(models.Model):
         User,
         related_name='services',
         editable=False,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
