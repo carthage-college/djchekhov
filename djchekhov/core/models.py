@@ -204,6 +204,13 @@ class Accounts(models.Model):
     )
     payment_plans = models.CharField(max_length=128, choices=PAYMENT_CHOICES)
 
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
+
 
 class Compliance(models.Model):
     """Documents that the student must sign."""
@@ -220,6 +227,13 @@ class Compliance(models.Model):
     sexual_misconduct = models.BooleanField(default=False)
     academic_honesty = models.BooleanField(default=False)
 
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
+
 
 class Emergency(models.Model):
     """ENS and health insurance."""
@@ -235,6 +249,13 @@ class Emergency(models.Model):
     emergency_contact = models.BooleanField(default=False)
     insurance = models.CharField(max_length=152, choices=INSURANCE_CHOICES)
 
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
+
 
 class Housing(models.Model):
     """Housing and meal plans."""
@@ -248,6 +269,13 @@ class Housing(models.Model):
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
     room_board = models.CharField(max_length=128, choices=ROOM_BOARD_CHOICES)
+
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
 
 
 class Registrar(models.Model):
@@ -267,6 +295,13 @@ class Registrar(models.Model):
     registration = models.CharField(max_length=128, choices=REGISTRATION_CHOICES)
     graduation = models.CharField(max_length=128, choices=GRADUATION_CHOICES)
 
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
+
 
 class Services(models.Model):
     """Student services."""
@@ -285,6 +320,13 @@ class Services(models.Model):
         max_length=128,
         choices=STUDENT_ID_CHOICES,
     )
+
+    def __str__(self):
+        """Default data for display."""
+        return "{0} ({1})".format(
+            self.user.username,
+            self.user.id,
+        )
 
 
 @receiver(models.signals.post_save, sender=User)
