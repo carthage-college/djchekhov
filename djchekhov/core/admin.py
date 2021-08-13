@@ -3,7 +3,13 @@
 """Admin classes for data models."""
 
 from django.contrib import admin
+from djchekhov.core.models import Accounts
+from djchekhov.core.models import Compliance
+from djchekhov.core.models import Emergency
+from djchekhov.core.models import Housing
 from djchekhov.core.models import Profile
+from djchekhov.core.models import Registrar
+from djchekhov.core.models import Services
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -38,4 +44,10 @@ class ProfileAdmin(admin.ModelAdmin):
     profile_lastname.short_description = "last name"
 
 
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Accounts)
+admin.site.register(Compliance)
+admin.site.register(Emergency)
+admin.site.register(Housing)
+admin.site.register(Profile)
+admin.site.register(Registrar)
+admin.site.register(Services)
