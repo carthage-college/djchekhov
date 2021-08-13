@@ -65,6 +65,7 @@ production.py
 wsgi.py
 migrations
 uwsgi_*.ini
+*.tsv
 
 # Flask stuff:
 instance/
