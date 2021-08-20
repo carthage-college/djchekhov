@@ -53,8 +53,8 @@ PARKING_PERMIT_CHOICES = (
         "I plan to bring a vehicle to campus. I understand that I need to contact the Office of Public Safety at 262-551-5911 to register my vehicle and obtain the parking permit.",
     ),
     (
-        'I do not plan to bring a vehicle to campus at this time',
-        "I do not plan to bring a vehicle to campus at this time",
+        'I do not plan to bring a vehicle to campus at this time.',
+        "I do not plan to bring a vehicle to campus at this time.",
     ),
 )
 PAYMENT_CHOICES = (
@@ -106,12 +106,12 @@ REGISTRATION_CHOICES = (
 )
 ROOM_BOARD_CHOICES = (
     (
-        'I do not need graduate housing or a meal plan',
-        "I do not need graduate housing or a meal plan",
+        'I do not need graduate housing or a meal plan.',
+        "I do not need graduate housing or a meal plan.",
     ),
     (
-        'I do need graduate housing and/or a meal plan',
-        "I do need graduate housing and/or a meal plan",
+        'I do need graduate housing and/or a meal plan.',
+        "I do need graduate housing and/or a meal plan.",
     ),
 )
 STUDENT_ID_CHOICES = (
