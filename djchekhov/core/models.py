@@ -9,14 +9,8 @@ from django.dispatch import receiver
 
 FINAID_CHOICES = (
     (
-        '''
-        I have completed the required financial aid documents
-        and submitted them to the Financial Aid Office.
-        ''',
-        """
-        I have completed the required financial aid documents
-        and submitted them to the Financial Aid Office.
-        """,
+        'I have completed the required financial aid documents and submitted them to the Financial Aid Office.',
+        "I have completed the required financial aid documents and submitted them to the Financial Aid Office.",
     ),
     (
         'I am not receiving loans.',
