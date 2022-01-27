@@ -38,7 +38,7 @@ urlpatterns = [
         {'template_name': 'registration/logged_out.html'},
         name='auth_loggedout',
     ),
-    path('accounts/', RedirectView.as_view(url=reverse_lazy('auth_login'))),
+    path('accounts/', RedirectView.as_view(url=reverse_lazy('home'))),
     path(
         'denied/',
         TemplateView.as_view(template_name='denied.html'),
