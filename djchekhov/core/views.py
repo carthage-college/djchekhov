@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
@@ -69,46 +70,49 @@ def forms(request, slug):
         form_class = str_to_class(
             'djchekhov.core.forms', '{0}Form'.format(slug.capitalize()),
         )
-        if request.method == 'POST':
-            form = form_class(
-                request.POST,
-                use_required_attribute=settings.REQUIRED_ATTRIBUTE,
-            )
-            if form.is_valid():
-                reg = form.save(commit=False)
-                reg.user = user
-                reg.save()
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    "Thank for submitting the {0} form.".format(form_title),
-                    extra_tags='alert-success',
+        if form_class:
+            if request.method == 'POST':
+                form = form_class(
+                    request.POST,
+                    use_required_attribute=settings.REQUIRED_ATTRIBUTE,
                 )
+                if form.is_valid():
+                    reg = form.save(commit=False)
+                    reg.user = user
+                    reg.save()
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        "Thank for submitting the {0} form.".format(form_title),
+                        extra_tags='alert-success',
+                    )
+                else:
+                    context = {'form': form, 'form_title': form_title}
+                    response = render(request, 'forms.html', context)
             else:
+                form = form_class(
+                    use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+                )
                 context = {'form': form, 'form_title': form_title}
+                if slug == 'emergency':
+                    with get_connection(settings.INFORMIX_ODBC) as connection:
+                        # emergency contact modal form
+                        sql = '{0} AND id="{1}"'.format(AA_REC, user.id)
+                        rows = xsql(sql, connection)
+                        for row in rows:
+                            ens = {}
+                            for field in ENS_FIELDS:
+                                ens[field] = getattr(row, field)
+                            context[row.aa] = ens
+                        context['mobile_carrier'] = MOBILE_CARRIER
+                        context['relationship'] = RELATIONSHIP
+                        context['solo'] = True
                 response = render(request, 'forms.html', context)
         else:
-            form = form_class(
-                use_required_attribute=settings.REQUIRED_ATTRIBUTE,
-            )
-            context = {'form': form, 'form_title': form_title}
-            if slug == 'emergency':
-                with get_connection(settings.INFORMIX_ODBC) as connection:
-                    # emergency contact modal form
-                    sql = '{0} AND id="{1}"'.format(AA_REC, user.id)
-                    rows = xsql(sql, connection)
-                    for row in rows:
-                        ens = {}
-                        for field in ENS_FIELDS:
-                            ens[field] = getattr(row, field)
-                        context[row.aa] = ens
-                    context['mobile_carrier'] = MOBILE_CARRIER
-                    context['relationship'] = RELATIONSHIP
-                    context['solo'] = True
-
-            response = render(request, 'forms.html', context)
+            response = HttpResponseRedirect(reverse_lazy('home'))
 
     return response
+
 
 @csrf_exempt
 @portal_auth_required(
