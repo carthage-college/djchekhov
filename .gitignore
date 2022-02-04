@@ -64,7 +64,7 @@ staging.py
 production.py
 wsgi.py
 migrations
-uwsgi_*.ini
+uwsgi.*.ini
 *.tsv
 
 # Flask stuff:
