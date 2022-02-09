@@ -24,18 +24,18 @@ class AccountsForm(forms.ModelForm):
 
     financial_aid = forms.ChoiceField(
         label="Financial Aid",
-        help_text=get_api_data(3099)['body'],
+        help_text=get_api_data(3315)['body'],
         choices=FINAID_CHOICES,
         widget=forms.RadioSelect(),
     )
     rights_responsibilities = forms.BooleanField(
         label="Student Accounts",
-        help_text=get_api_data(3098)['body'],
+        help_text=get_api_data(3317)['body'],
         required=True,
     )
     payment_plans = forms.ChoiceField(
         label="Payment Plans",
-        help_text=get_api_data(3100)['body'],
+        help_text=get_api_data(3316)['body'],
         choices=PAYMENT_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -52,17 +52,17 @@ class ComplianceForm(forms.ModelForm):
 
     community_code = forms.BooleanField(
         label="Community Code",
-        help_text=get_api_data(3107)['body'],
+        help_text=get_api_data(3303)['body'],
         required=True,
     )
     sexual_misconduct = forms.BooleanField(
         label="Sexual Misconduct Policy",
-        help_text=get_api_data(3108)['body'],
+        help_text=get_api_data(3304)['body'],
         required=True,
     )
     academic_honesty = forms.BooleanField(
         label="Academic Honesty Guidelines",
-        help_text=get_api_data(3109)['body'],
+        help_text=get_api_data(3302)['body'],
         required=True,
     )
 
@@ -78,12 +78,12 @@ class EmergencyForm(forms.ModelForm):
 
     emergency_contact = forms.BooleanField(
         label="Emergency Contact",
-        help_text=get_api_data(3111)['body'],
+        help_text=get_api_data(3305)['body'],
         required=True,
     )
     insurance = forms.ChoiceField(
         label="International Student Insurance",
-        help_text=get_api_data(3110)['body'],
+        help_text=get_api_data(3307)['body'],
         choices=INSURANCE_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -100,7 +100,7 @@ class HousingForm(forms.ModelForm):
 
     room_board = forms.ChoiceField(
         label="Housing",
-        help_text=get_api_data(3106)['body'],
+        help_text=get_api_data(3306)['body'],
         choices=ROOM_BOARD_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -117,26 +117,26 @@ class RegistrarForm(forms.ModelForm):
     """Form for the data model."""
 
     email = forms.BooleanField(
-        help_text=get_api_data(3101)['body'],
+        help_text=get_api_data(3308)['body'],
         required=True,
     )
     onelogin = forms.BooleanField(
         label="OneLogin",
-        help_text=get_api_data(3102)['body'],
+        help_text=get_api_data(3311)['body'],
         required=True,
     )
     schoology = forms.BooleanField(
-        help_text=get_api_data(3103)['body'],
+        help_text=get_api_data(3312)['body'],
         required=True,
     )
     registration = forms.ChoiceField(
         label="My Carthage Portal and Course Registration",
-        help_text=get_api_data(3104)['body'],
+        help_text=get_api_data(3310)['body'],
         choices=REGISTRATION_CHOICES,
         widget=forms.RadioSelect(),
     )
     graduation = forms.ChoiceField(
-        help_text=get_api_data(3105)['body'],
+        help_text=get_api_data(3309)['body'],
         choices=GRADUATION_CHOICES,
         widget=forms.RadioSelect(),
     )
@@ -153,13 +153,13 @@ class ServicesForm(forms.ModelForm):
 
     parking_permit = forms.ChoiceField(
         label="Parking Permit",
-        help_text=get_api_data(3112)['body'],
+        help_text=get_api_data(3313)['body'],
         choices=PARKING_PERMIT_CHOICES,
         widget=forms.RadioSelect(),
     )
     student_card = forms.ChoiceField(
         label="Student ID",
-        help_text=get_api_data(3113)['body'],
+        help_text=get_api_data(3314)['body'],
         choices=STUDENT_ID_CHOICES,
         widget=forms.RadioSelect(),
     )
