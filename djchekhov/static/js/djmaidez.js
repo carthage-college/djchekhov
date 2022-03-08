@@ -24,6 +24,8 @@ function makeDialog() {
                     ENS_SMS: "1",
                     ENS_CARRIER: $("#ENS_CARRIER").val(),
                     ENS_EMAIL: $("#ENS_EMAIL").val(),
+                    CLLP_PHONE: $("#CLLP_PHONE").val(),
+                    EML4_EMAIL: $("#EML4_EMAIL").val(),
                     ICE_NAME: $("#ICE_NAME").val(),
                     ICE_PHONE1: $("#ICE_PHONE1").val(),
                     ICE_PHONE2: $("#ICE_PHONE2").val(),
