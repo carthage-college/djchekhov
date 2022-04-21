@@ -59,7 +59,7 @@ def forms(request, slug):
     form_title = TITLES[slug]
     status = getattr(user, slug).all().count()
     response = HttpResponseRedirect(reverse_lazy('home'))
-    if status:
+    if status and not user.is_superuser:
         messages.add_message(
             request,
             messages.WARNING,

@@ -22,7 +22,9 @@
       {% include "form_field.inc.html" %}
     {% endfor %}
     </ul>
+    {% if not user.is_superuser %}
     <button class="btn btn-primary btn-block" type="submit" value="Submit" id="submit-button">Submit</button>
+    {% endif %}
   </form>
   <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4 ml-2">
     <div class="row list-group">
