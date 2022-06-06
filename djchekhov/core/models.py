@@ -117,6 +117,10 @@ STUDENT_ID_CHOICES = (
         'I need assistance taking and uploading a digital photo for my ID card.',
         "I need assistance taking and uploading a digital photo for my ID card.",
     ),
+    (
+        'I do not need to upload my photo because I am a TLE/staff and will get my ID through Human Resources.',
+        "I do not need to upload my photo because I am a TLE/staff and will get my ID through Human Resources.",
+    ),
 )
 
 

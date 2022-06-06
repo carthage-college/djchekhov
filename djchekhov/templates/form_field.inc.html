@@ -1,0 +1,14 @@
+<li class="form-group"{% if dominatrix %} id="{{dominatrix}}"{% endif %}>
+    {% if field.label %}<h3>{{ field.label_tag }}</h3>{% endif %}
+    {% if field.errors %}
+    <div class="required warning">
+        <span class="error">{{ field.errors|join:", "}}</span>
+    {% else %}
+    <div{% if field.field.required %} class="required"{% endif %}>
+    {% endif %}
+    {% if field.help_text %}
+        <p class="help">{{field.help_text|safe}}</p>
+    {% endif %}
+    {{field}}
+    </div>
+</li>
